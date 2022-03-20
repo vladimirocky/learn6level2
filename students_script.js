@@ -9,17 +9,53 @@ let usersMass = [];
 
 // Напишите функцию-конструктор
 // которая позволит создавать объекты User
-function User (/* аргументы */) {
-    /**
-     * Ваш код тут
-     *
+function User (name,secondName,familyName,loginUser,ageUser,heightUser) {
     this.name = name;
-    this...
-    ...
-     this.login = login;
-     ...
-    *
-     */
+    this.secondName = secondName;
+    this.familyName = familyName;
+    this.loginUser = loginUser;
+    this.ageUser = ageUser;
+    this.heightUser = heightUser;
+}
+
+//Добавляем функцию которая реализует добавление пользователей
+function addUser(){
+    let isNotNull = nameUser.value && secName.value && lastName.value && login.value && Number(age.value) && Number(userHeight.value);
+    console.log(nameUser.value);
+
+    if(isNotNull){
+        let newUser = new User(
+            name = nameUser.value,
+            secondName = secName.value,
+            familyName = lastName.value,
+            loginUser = login.value,
+            ageUser = age.value,
+            heightUser = userHeight.value
+        );
+
+        let id = usersMass.length;
+        usersMass.push(newUser);
+
+        
+
+        let opt = document.createElement("option");
+
+        opt.value = String(id);
+        opt.text = newUser.loginUser;
+        selectUser.appendChild(opt);
+
+
+        printUserMass(usersMass,massOfUser);
+
+        document.getElementById('nameUser').value = '';
+        document.getElementById('secName').value = '';
+        document.getElementById('lastName').value = '';
+        document.getElementById('login').value = '';
+        document.getElementById('age').value = '';
+        document.getElementById('userHeight').value = '';
+    }else{
+        alert("Введите значения для всех полей, проверьте что значения возраста и роста это числа!");
+    }
 }
 
 // Функция реализует вывод массива на экран
@@ -79,40 +115,42 @@ function printMass (anyArray, targTable) {
     targTable.appendChild(tableRes);
 }
 
-/**
- * Ваш код тут!
- *
- * Реализуйте функцию printUserMass
- * По аналогии с printUser
- * Только теперь функция будет работать с массивом объектов User
- * Нужно немного поменять цикл
- * Он также пройдется по всем элементам массива
- * Используйте for of или классический for
- * Однако в таблицу надо записывать не сам объект, а его свойство
- * свойтво -- логин пользователя
- *
- * В целом, в функции почти ничего не поменяется
- * за исключением пары строк приведенных ниже
- *
- * ...
- * так как нам точно нужен другой идетнификатор для второй таблице в документе
- * let oldTable = document.getElementById('tableRemovableUsers');
- * if (oldTable) {
- *     targTable.removeChild(oldTable);
- * }
- * ...
- * for (let i = 0; i < usersMass.length; i++){
- *     ...
- *     let valueTd = document.createElement('td');
- *     valueTd.innerText = anyArray[i].login;
- *     ..
- * }
- * ...
- * так как нам точно нужен другой идетнификатор для второй таблице в документе
- * tableRes.id = 'tableRemovableUsers';
- * ...
- *
-*/
+
+function printUserMass(anyArray,targTable){
+    let oldTable = document.getElementById('tableRemovableUsers');
+    if (oldTable) {
+        targTable.removeChild(oldTable);
+    }
+
+    let tableRes = document.createElement('table')
+    let rawIndex = document.createElement('tr')
+    let rawValue = document.createElement('tr');
+    let index = document.createElement('th');
+    index.innerText = 'Index';
+    let valueTd = document.createElement('td');
+    valueTd.innerText = 'Value';
+    rawIndex.appendChild(index);
+    rawValue.appendChild(valueTd);
+
+    for (let i = 0; i < usersMass.length; i++){
+        let index = document.createElement('th');
+        index.innerText = i;
+
+        let valueTd = document.createElement('td');
+        valueTd.innerText = anyArray[i].loginUser;
+
+        rawIndex.appendChild(index);
+        rawValue.appendChild(valueTd);
+    }
+
+    // Записываем в теблицу строки со значениями
+    tableRes.appendChild(rawIndex);
+    tableRes.appendChild(rawValue);
+    // Добавим id таблицы
+    tableRes.id = 'tableRemovableUsers';
+    // Запишем таблицу на свое место
+    targTable.appendChild(tableRes);
+}
 
 // эта функция реализована для примера и уже работает
 function popMass () {
@@ -136,10 +174,8 @@ function shiftMass(){
     // мы получаем его длину
     // если длина 0 - выражение будет приведено к false
     if (baseMass.length) {
-        /**
-         * Ваш код тут
-         * let result =
-         */
+
+        result = baseMass.shift();
 
         pop_shift_Value.innerHTML = '- ' + result;
         printMass(baseMass, massOnBoard);
@@ -152,10 +188,9 @@ function pushMass () {
 
     let pushVal = push_unshift_Value.value;
     if (pushVal) {
-        /**
-         * Ваш код тут
-         * примените push к baseMass
-         */
+        baseMass.push(pushVal);
+        //Сбросим значение чтобы было удобнее добавлять новые элементы массива
+        push_unshift_Value.value = '';
         printMass(baseMass, massOnBoard); // это выведет обновленный массив
     } else {
         alert("Введите значение!");
@@ -167,79 +202,172 @@ function unshiftMass () {
     let shiftVal = push_unshift_Value.value;
 
     if (shiftVal) {
-        /**
-         * Ваш код тут
-         * примените unshift к baseMass
-         * Вызовите printMass чтобы отобразить
-         * новый массив
-         */
+        baseMass.unshift(shiftVal);
+        push_unshift_Value.value = '';
+        printMass(baseMass, massOnBoard);
     } else {
         alert("Введите значение!");
     }
 }
 
 function lengthMass(){
-    /**
-     * Ваш код тут
-     * let result =
-     * запишите в result длину массива
-     */
-    lengthValue.innerHTML = " - " + result;
+    result = baseMass.length;
+    if(result != 0){
+        lengthValue.innerHTML = " - " + result;
+    }else{
+        lengthValue.innerHTML = '- Массив пуст';
+    }
+    
 }
 
 function concatMass (){
     // В new_mass будет записан массив,
     // сформированный из значений поля ввода, записанных через запятую
     let new_mass = concatValue.value.split(',');
-    /**
-     * Ваш код тут
-     * Напишите условие, чтобы проверить
-     * что поле ввода не пустое
-     * Если поле вводе не пустое - примените concat
-     * метод массивов, позволяющий объединять один массив с другим
-     * вот так --
-     * основной_массив = основной_массив.concat(другой_массив)
-     *
-     * Если поле ввода пустое используйте окно alert
-     */
+    
+    //Если первый элемент массива пустой(а в качестве разделителя мы используем ','), значит массив пустой, а значит поле ввода пустое
+    if(new_mass[0] == ''){
+        alert('Заполните значения массива!');
+    }else{
+        baseMass = baseMass.concat(new_mass);
+        concatValue.value = '';
+        printMass(baseMass, massOnBoard);
+    }
 }
 
 function searchMass (){
-    /**
-     * Ваш код тут
-     * Получите значение из элемента html с id -- searchValue
-     * Если значение непустое примените метод indexOf
-     * Этот метод позволит получить индекс элемента массива по значению
-     * массив.indexOf(значение)
-     * Если такого значения нет -- вернется -1
-     *
-     * Результат успешного поиска запишите в элементе html с id -- resIndex
-     * Если значение не найдено или поле пустое используйте окно alert
-     */
+    if(searchValue.value){
+        let indexElem = baseMass.indexOf(searchValue.value);
+        searchValue.value = '';
+        if(indexElem != -1){
+            resIndex.innerHTML = indexElem;
+        }else{
+            resIndex.innerHTML = '- Элемент не найден!';
+        }
+    }else{
+        alert('Поле для поиска пустое!');
+    }
 }
 
-/**
- * Ваш код тут
- *
- * Внимательно посмотрите на реализацию в файле script.js
- * Посмотрите на код в этом вайле выше
- *
- * Используйте написанную вами функцию printUserMass() для массива usersMass
- * В этот массив и записывайте объекты User
- *
- * селектор -- элемент html "выпадающий список"
- *
- * По аналогии реализуйте следующие функции
- * addUser() -- добавит нового пользователя, обновит массив и селектор
- * midleHeight() -- выведет средний рост пользователей
- * midleAge() -- выведет средний возраст
- * countUsers() -- выведет длину массива пользователей
- * myFunc() - функция которая работает с селектором, придумайте что сделать самостоятельно
- */
+
+
+function midleHeight(){
+    let storage = 0;
+    let countUsers = usersMass.length;
+    if(countUsers>0){
+        for(userUnit of usersMass){
+            storage += Number(userUnit.heightUser);
+        }
+        let result = storage/countUsers;
+        userResult.innerHTML = result;
+    }else{
+        alert('Нет ни одного пользователя!');
+    }
+}
+
+function midleAge(){
+    let storage = 0;
+    let countUsers = usersMass.length;
+    if(countUsers>0){
+        for(userUnit of usersMass){
+            storage += Number(userUnit.ageUser);
+        }
+        let result = storage/countUsers;
+        userResult.innerHTML = result;
+    }else{
+        alert('Нет ни одного пользователя!');
+    }
+}
+
+function countUsers(){
+    let countUsers = usersMass.length;
+    if(countUsers>0){
+        userResult.innerHTML = countUsers;
+    }else{
+        alert('Нет ни одного пользователя!');
+    }
+}
+
+//Пишем функцию транслитерации - она нам понадобится для определения пола
+function translit(word){
+	var answer = '';
+	var converter = {
+		'а': 'a',    'б': 'b',    'в': 'v',    'г': 'g',    'д': 'd',
+		'е': 'e',    'ё': 'e',    'ж': 'zh',   'з': 'z',    'и': 'i',
+		'й': 'y',    'к': 'k',    'л': 'l',    'м': 'm',    'н': 'n',
+		'о': 'o',    'п': 'p',    'р': 'r',    'с': 's',    'т': 't',
+		'у': 'u',    'ф': 'f',    'х': 'h',    'ц': 'c',    'ч': 'ch',
+		'ш': 'sh',   'щ': 'sch',  'ь': '',     'ы': 'y',    'ъ': '',
+		'э': 'e',    'ю': 'yu',   'я': 'ya',
+ 
+		'А': 'A',    'Б': 'B',    'В': 'V',    'Г': 'G',    'Д': 'D',
+		'Е': 'E',    'Ё': 'E',    'Ж': 'Zh',   'З': 'Z',    'И': 'I',
+		'Й': 'Y',    'К': 'K',    'Л': 'L',    'М': 'M',    'Н': 'N',
+		'О': 'O',    'П': 'P',    'Р': 'R',    'С': 'S',    'Т': 'T',
+		'У': 'U',    'Ф': 'F',    'Х': 'H',    'Ц': 'C',    'Ч': 'Ch',
+		'Ш': 'Sh',   'Щ': 'Sch',  'Ь': '',     'Ы': 'Y',    'Ъ': '',
+		'Э': 'E',    'Ю': 'Yu',   'Я': 'Ya'
+	};
+ 
+	for (var i = 0; i < word.length; ++i ) {
+		if (converter[word[i]] == undefined){
+			answer += word[i];
+		} else {
+			answer += converter[word[i]];
+		}
+	}
+ 
+	return answer;
+}
+
+//Функция определения пола
+function myFunc(){
+    //Достаем id из select
+    let id = selectUser.value;
+    //Получаем имя из массива объектов userMass и переводим его в транслит
+    let userName = translit(usersMass[id].name);
+    console.log(userName);
+    //Подготавливаем ссылку с нужными параметрами
+    let url = 'https://api.genderize.io?name='+userName;
+
+    //Оборачиваем запрос в асинхронную функцию
+    async function getGender(){
+        let response = await fetch(url);
+        //Если пришел 200-й код, все ок.
+        if (response.ok) {
+            //Получаем json
+            let json = await response.json();
+            
+            //Из объекта json получаем пол
+            let gender = json.gender;
+
+            //Выводим имя
+            if(gender == 'male'){
+                userResult.innerHTML = 'Ваш пол мужской';
+            }
+            if(gender == 'female'){
+                userResult.innerHTML = 'Ваш пол женский';
+            }
+            if(gender == 'null'){
+                userResult.innerHTML = 'Не получилось определить пол';
+            }
+        } else {
+        alert("Ошибка HTTP: " + response.status);
+        }
+    }
+
+    getGender();
+}
+
+function clearData(){
+    document.getElementById('nameUser').value = '';
+    document.getElementById('secName').value = '';
+    document.getElementById('lastName').value = '';
+    document.getElementById('login').value = '';
+    document.getElementById('age').value = '';
+    document.getElementById('userHeight').value = '';
+}
 
 document.addEventListener("DOMContentLoaded", function () { printMass(baseMass, massOnBoard);});
-/**
- * Внимание!
- * Раскомментировать, когда реализуете printUserMass()
+
 document.addEventListener("DOMContentLoaded", function () { printUserMass(usersMass, massOfUser);});
-*/
