@@ -92,6 +92,7 @@ function unshiftMass() {
     let temp = pushUnshiftValue.value;
     newArray.unshift(temp);
     printMass(newArray, massOnBoard);
+    pushUnshiftValue.value = '';
   }
 }
 //PUSH Добавляет в конец массива
@@ -100,6 +101,7 @@ function pushMass() {
     let temp = pushUnshiftValue.value;
     newArray.push(temp);
     printMass(newArray, massOnBoard);
+    pushUnshiftValue.value = '';
   }
 }
 // CONCAT Объединение двух массивов
