@@ -1,245 +1,200 @@
-// init
-/* Читайте комментарии и допишите код где необходимо */
-
-// Тут объяелен массив и его можно и нужно будет менять
 let baseMass = ['Вася','Петя','Коля','Женя'];
-// Это массив пользователей, работайте с ним
-// для выполнения последнего задания
 let usersMass = [];
-
-// Напишите функцию-конструктор
-// которая позволит создавать объекты User
-function User (/* аргументы */) {
-    /**
-     * Ваш код тут
-     *
+function User (name,secondName,familyName,loginUser,ageUser,heightUser) {
     this.name = name;
-    this...
-    ...
-     this.login = login;
-     ...
-    *
-     */
+    this.secondName = secondName;
+    this.familyName = familyName;
+    this.loginUser = loginUser;
+    this.ageUser = ageUser;
+    this.heightUser = heightUser;
 }
-
-// Функция реализует вывод массива на экран
-// Если вы изменили массив - вызовите эту функцию чтобы отобразить актальные значения
-/**
- *
- * @param anyArray - массив с данными которые будем отображать
- * @param targTable - элемент HTML в котором мы разместим нашу таблицу
- */
 function printMass (anyArray, targTable) {
-    // это позволит "почистить" наш html от старой таблицы
     let oldTable = document.getElementById('tableRemovable');
-    // если таблица не пустая - почистим ее
     if (oldTable) {
         targTable.removeChild(oldTable);
     }
-
-    // Создать элемент таблица
     let tableRes = document.createElement('table')
-    // Строка индекса
     let rawIndex = document.createElement('tr')
-    // Строка значений
     let rawValue = document.createElement('tr');
-    // Ячейка заголовок
     let index = document.createElement('th');
-    // Присвоим значение ячейки заголовка
     index.innerText = 'Index';
-    // Ячейка значений
     let valueTd = document.createElement('td');
-    // Присвоение значения ячейке значений
     valueTd.innerText = 'Value';
-    // Добавить к строкам новые ячейки
     rawIndex.appendChild(index);
     rawValue.appendChild(valueTd);
-
-    // Цикл, который пройдется по массиву и отрисует его значения
-    for (let key_elem in anyArray){
-        // умышленно используем in
-        // чтобы использовать реальные индексы элементов массива
-        // Ячейка заголовок
+    for (let key_elem in anyArray) {
         let index = document.createElement('th');
         index.innerText = key_elem;
-        // Ячейка значений
         let valueTd = document.createElement('td');
         valueTd.innerText = anyArray[key_elem];
-        // Добавить к строкам новые ячейки
         rawIndex.appendChild(index);
         rawValue.appendChild(valueTd);
     }
-
-    // Записываем в теблицу строки со значениями
     tableRes.appendChild(rawIndex);
     tableRes.appendChild(rawValue);
-    // Добавим id таблицы
     tableRes.id = 'tableRemovable';
-    // Запишем таблицу на свое место
     targTable.appendChild(tableRes);
 }
-
-/**
- * Ваш код тут!
- *
- * Реализуйте функцию printUserMass
- * По аналогии с printUser
- * Только теперь функция будет работать с массивом объектов User
- * Нужно немного поменять цикл
- * Он также пройдется по всем элементам массива
- * Используйте for of или классический for
- * Однако в таблицу надо записывать не сам объект, а его свойство
- * свойтво -- логин пользователя
- *
- * В целом, в функции почти ничего не поменяется
- * за исключением пары строк приведенных ниже
- *
- * ...
- * так как нам точно нужен другой идетнификатор для второй таблице в документе
- * let oldTable = document.getElementById('tableRemovableUsers');
- * if (oldTable) {
- *     targTable.removeChild(oldTable);
- * }
- * ...
- * for (let i = 0; i < usersMass.length; i++){
- *     ...
- *     let valueTd = document.createElement('td');
- *     valueTd.innerText = anyArray[i].login;
- *     ..
- * }
- * ...
- * так как нам точно нужен другой идетнификатор для второй таблице в документе
- * tableRes.id = 'tableRemovableUsers';
- * ...
- *
-*/
-
-// эта функция реализована для примера и уже работает
+function printUserMass(anyArray,targTable) {
+    let oldTable = document.getElementById('tableRemovableUsers');
+    if (oldTable) {
+        targTable.removeChild(oldTable);
+    }
+    let tableRes = document.createElement('table')
+    let rawIndex = document.createElement('tr')
+    let rawValue = document.createElement('tr');
+    let index = document.createElement('th');
+    index.innerText = 'Index';
+    let valueTd = document.createElement('td');
+    valueTd.innerText = 'Value';
+    rawIndex.appendChild(index);
+    rawValue.appendChild(valueTd);
+    for (let i = 0; i < usersMass.length; i++) {
+        let index = document.createElement('th');
+        index.innerText = i;
+        let valueTd = document.createElement('td');
+        valueTd.innerText = anyArray[i].loginUser;
+        rawIndex.appendChild(index);
+        rawValue.appendChild(valueTd);
+    }
+    tableRes.appendChild(rawIndex);
+    tableRes.appendChild(rawValue);
+    tableRes.id = 'tableRemovableUsers';
+    targTable.appendChild(tableRes);
+}
 function popMass () {
-    // чтобы проверить, что массив не пустой
-    // мы получаем его длину
-    // если длина 0 - выражение будет приведено к false
     if (baseMass.length) {
-        // используем метод массива
         let result = baseMass.pop();
-        // записываем результат в html документ
         pop_shift_Value.innerHTML = '- ' + result;
-        // вызов функции вывода массива
         printMass(baseMass, massOnBoard);
     } else {
-        alert("Массив уже пуст!\nСначала добавьте значения");
+        alert("Нечего выталкивать.\nМассив пуст.");
     }
 }
-
-function shiftMass(){
-    // чтобы проверить, что массив не пустой
-    // мы получаем его длину
-    // если длина 0 - выражение будет приведено к false
+function shiftMass() {
     if (baseMass.length) {
-        /**
-         * Ваш код тут
-         * let result =
-         */
-
+        result = baseMass.shift();
         pop_shift_Value.innerHTML = '- ' + result;
         printMass(baseMass, massOnBoard);
     } else {
-        alert("Массив уже пуст!");
+        alert("Нечего сдвигать.\nМассив пуст.");
     }
 }
-
 function pushMass () {
-
     let pushVal = push_unshift_Value.value;
     if (pushVal) {
-        /**
-         * Ваш код тут
-         * примените push к baseMass
-         */
-        printMass(baseMass, massOnBoard); // это выведет обновленный массив
+        baseMass.push(pushVal);
+        push_unshift_Value.value = '';
+        printMass(baseMass, massOnBoard);
     } else {
-        alert("Введите значение!");
+        alert("Пожалуйста, введите значение.");
     }
 }
-
 function unshiftMass () {
-
     let shiftVal = push_unshift_Value.value;
-
     if (shiftVal) {
-        /**
-         * Ваш код тут
-         * примените unshift к baseMass
-         * Вызовите printMass чтобы отобразить
-         * новый массив
-         */
+        baseMass.unshift(shiftVal);
+        push_unshift_Value.value = '';
+        printMass(baseMass, massOnBoard);
     } else {
-        alert("Введите значение!");
+        alert("Пожалуйста, введите значение.");
     }
 }
-
-function lengthMass(){
-    /**
-     * Ваш код тут
-     * let result =
-     * запишите в result длину массива
-     */
-    lengthValue.innerHTML = " - " + result;
+function lengthMass() {
+    result = baseMass.length;
+    if(result != 0) {
+        lengthValue.innerHTML = " - " + result;
+    }
+    else {
+        lengthValue.innerHTML = " - " + 0;
+    }
 }
-
-function concatMass (){
-    // В new_mass будет записан массив,
-    // сформированный из значений поля ввода, записанных через запятую
+function concatMass () {
     let new_mass = concatValue.value.split(',');
-    /**
-     * Ваш код тут
-     * Напишите условие, чтобы проверить
-     * что поле ввода не пустое
-     * Если поле вводе не пустое - примените concat
-     * метод массивов, позволяющий объединять один массив с другим
-     * вот так --
-     * основной_массив = основной_массив.concat(другой_массив)
-     *
-     * Если поле ввода пустое используйте окно alert
-     */
+    if(new_mass[0] == '') {
+        alert('Заполните значения массива!');
+    } else{
+        baseMass = baseMass.concat(new_mass);
+        concatValue.value = '';
+        printMass(baseMass, massOnBoard);
+    }
 }
-
-function searchMass (){
-    /**
-     * Ваш код тут
-     * Получите значение из элемента html с id -- searchValue
-     * Если значение непустое примените метод indexOf
-     * Этот метод позволит получить индекс элемента массива по значению
-     * массив.indexOf(значение)
-     * Если такого значения нет -- вернется -1
-     *
-     * Результат успешного поиска запишите в элементе html с id -- resIndex
-     * Если значение не найдено или поле пустое используйте окно alert
-     */
+function searchMass () {
+    if(searchValue.value) {
+        let indexElem = baseMass.indexOf(searchValue.value);
+        searchValue.value = '';
+        if(indexElem != -1) {
+            resIndex.innerHTML = indexElem;
+        }
+    } else {
+        alert('Поле для поиска не заполнено или элемент не найден.\nПожалуйста повторите попытку, изменив входные данные');
+    }
 }
-
-/**
- * Ваш код тут
- *
- * Внимательно посмотрите на реализацию в файле script.js
- * Посмотрите на код в этом вайле выше
- *
- * Используйте написанную вами функцию printUserMass() для массива usersMass
- * В этот массив и записывайте объекты User
- *
- * селектор -- элемент html "выпадающий список"
- *
- * По аналогии реализуйте следующие функции
- * addUser() -- добавит нового пользователя, обновит массив и селектор
- * midleHeight() -- выведет средний рост пользователей
- * midleAge() -- выведет средний возраст
- * countUsers() -- выведет длину массива пользователей
- * myFunc() - функция которая работает с селектором, придумайте что сделать самостоятельно
- */
-
+function addUser() {
+    let isNotNull = nameUser.value && secName.value && lastName.value && login.value && Number(age.value) && Number(userHeight.value);
+    console.log(nameUser.value);
+    if(isNotNull) {
+        let newUser = new User(
+            name = nameUser.value,
+            secondName = secName.value,
+            familyName = lastName.value,
+            loginUser = login.value,
+            ageUser = age.value,
+            heightUser = userHeight.value
+        );
+        let id = usersMass.length;
+        usersMass.push(newUser);
+        let opt = document.createElement("option");
+        opt.value = String(id);
+        opt.text = newUser.loginUser;
+        selectUser.appendChild(opt);
+        printUserMass(usersMass,massOfUser);
+        document.getElementById('nameUser').value = '';
+        document.getElementById('secName').value = '';
+        document.getElementById('lastName').value = '';
+        document.getElementById('login').value = '';
+        document.getElementById('age').value = '';
+        document.getElementById('userHeight').value = '';
+    }else{
+        alert("Все поля обязательны для заполнения.\nВозможно вы ввели не корректные данные.");
+    }
+}
+function midleHeight() {
+    let storage = 0;
+    let countUsers = usersMass.length;
+    if(countUsers>0){
+        for(userUnit of usersMass) {
+            storage += Number(userUnit.heightUser);
+        }
+        let result = storage/countUsers;
+        userResult.innerHTML = result;
+    } else {
+        alert('Нет возможности вычислить средний рост пользователей.\nПожалуйста, добавьте хотя бы одного пользователя.');
+    }
+}
+function midleAge() {
+    let storage = 0;
+    let countUsers = usersMass.length;
+    if(countUsers>0){
+        for(userUnit of usersMass) {
+            storage += Number(userUnit.ageUser);
+        }
+        let result = storage/countUsers;
+        userResult.innerHTML = result;
+    }else{
+        alert('Нет возможности вычислить средний возраст пользователей.\nПожалуйста, добавьте хотя бы одного пользователя.');
+    }
+}
+function countUsers() {
+    let countUsers = usersMass.length;
+    if(countUsers>0) {
+        userResult.innerHTML = countUsers;
+    } else {
+        alert('Нет возможности вычислить количество пользователей.\nПожалуйста, добавьте хотя бы одного пользователя.');
+    }
+}
+function myFunc () {
+    document.getElementsByClassName('ddd')[0].style.background = "#6f4e37git";
+}
 document.addEventListener("DOMContentLoaded", function () { printMass(baseMass, massOnBoard);});
-/**
- * Внимание!
- * Раскомментировать, когда реализуете printUserMass()
 document.addEventListener("DOMContentLoaded", function () { printUserMass(usersMass, massOfUser);});
-*/

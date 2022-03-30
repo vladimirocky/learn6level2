@@ -8,7 +8,7 @@
     <script src="script.js"></script>
     <script src="students_script.js"></script>
 </head>
-<body id = 'bod'>
+<body id = 'bod' class="ddd">
 <header>
     <h1 align="center"> Задание №6 Модуль №2</h1>
 </header>
@@ -66,7 +66,7 @@
     <p>
         <span><input type="text" id="searchValue" placeholder="значение элемента массива" required> </span>
         <button onclick="searchMass()"> получить индекс по значению </button>
-        <p> индекс искомого элемента <span id="resIndex"></span></p>
+    <p> индекс искомого элемента <span id="resIndex"></span></p>
     </p>
 </div>
 <hr>
@@ -74,14 +74,12 @@
 <div align="center">
     <h2> Задание - Пользователи </h2>
     <p> По аналогии с примером и предыдущим заданием, создайте функцию коснтруктор и реализуйте прочие функции, чтобы работали все кнопки. Дополнительно придумайте действие и реализуйте функцию, которая сработает при нажатии на последнюю кнопу</p>
-    <span><input type="text" id="name" placeholder="Имя"> </span>
+    <span><input type="text" id="nameUser" placeholder="Имя"> </span>
     <span><input type="text" id="secName" placeholder="Отчество"> </span>
     <span><input type="text" id="lastName" placeholder="Фамилия"> </span>
     <p><input type="text" id="login" placeholder="логин" required> </p>
     <p><input type="text" id="age" placeholder="возраст" required> </p>
     <p><input type="text" id="userHeight" placeholder="рост" required> </p>
-    <div id="massOfUser">
-    </div>
     <button onclick="addUser()"> добавить пользователя</button>
     <button onclick="midleHeight()"> средний рост </button>
     <button onclick="midleAge()"> средний возраст </button>
