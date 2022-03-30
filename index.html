@@ -6,9 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Задание 6</title>
-  <link rel="stylesheet" href="./assets/css/style.css">
-  <script src="./assets/js/array.js" defer></script>
-  <script src="./assets/js/object.js" defer></script>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="/assets/js/array.js" defer></script>
+  <script src="/assets/js/object.js" defer></script>
+  <script src="/assets/js/users.js" defer></script>
+  <script src="/assets/js/main.js" defer></script>
 </head>
 
 <body>
@@ -124,15 +126,35 @@
           </div>
         </div>
       </div>
+      <div class="content-box">
+        <h3 class="content-box__title">Создание пользователей. Вывод списка пользователей</h3>
 
+        <div class="bx s-2">
+          <div class="user-box">
 
+            <ul>
+              <li>
+                <label for="userNameNew">Имя:</label>
+                <input type="text" id="userNameNew" placeholder="Имя">
+              </li>
+              <li>
+                <label for="userAge">Возраст:</label>
+                <input type="text" id="userAgeNew" placeholder="Возраст" required>
+              </li>
+            </ul>
+            <p><button onclick="createUser()">Добавить прользователя</button>
+              <button onclick="deleteUser()">Удалить прользователя</button></p>
 
+          </div>
+          <div class="user-box">
+            <div id="usersTable">
+            </div>
+          </div>
+        </div>
 
-
-
+      </div>
     </div>
     </div>
-
   </section>
   <footer class="footer">
 
