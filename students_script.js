@@ -194,7 +194,7 @@ function countUsers() {
     }
 }
 function myFunc () {
-    document.getElementsByClassName('ddd')[0].style.background = "#6f4e37git";
+    document.getElementsByClassName('ddd')[0].style.background = "#6f4e37";
 }
 document.addEventListener("DOMContentLoaded", function () { printMass(baseMass, massOnBoard);});
 document.addEventListener("DOMContentLoaded", function () { printUserMass(usersMass, massOfUser);});
