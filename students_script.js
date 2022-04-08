@@ -244,7 +244,7 @@ function concatMass() {
    */
 
   if (concatValue.value) {
-    console.log(1);
+    
     baseMass = baseMass.concat(new_mass);
     printMass(baseMass, massOnBoard);
   } else {
