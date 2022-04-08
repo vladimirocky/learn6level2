@@ -295,12 +295,24 @@ function searchMass() {
  * myFunc() - функция которая работает с селектором, придумайте что сделать самостоятельно
  */
 
+function setOptions() {
+  let id = usersMass.length;
+
+  let opt = document.createElement("option");
+
+  opt.value = String(id);
+
+  opt.text = newUser.login;
+
+  selectUser.appendChild(opt);
+}
+
 function addUser() {
   const requiredNotEmpty = login.value && age.value && userHeight.value;
 
   if (requiredNotEmpty) {
     let newUser = new User(
-      name.value,
+      firstName.value,
       secName.value,
       lastName.value,
       login.value,
@@ -308,8 +320,23 @@ function addUser() {
       userHeight.value
     );
     usersMass.push(newUser);
-    console.log(usersMass);
+
+    let id = usersMass.length;
+
+    let opt = document.createElement("option");
+
+    opt.value = String(id);
+
+    opt.text = newUser.login;
+
+    selectUser.appendChild(opt);
   }
+  firstName.value = "";
+  secName.value = "";
+  lastName.value = "";
+  login.value = "";
+  age.value = "";
+  userHeight.value = "";
 }
 
 function midleHeight() {
@@ -336,12 +363,18 @@ function countUsers() {
   userResult.innerHTML = `${usersMass.length} пользователей`;
 }
 
+//Удаляет выбранного пользователя
 function myFunc() {
-  if (usersMass.length !== 0) {
-    usersMass.length = 0;
-    userResult.innerHTML = `Милорд, нашу базу пользователей пожрал долгоносик. Осталось пользователей: ${usersMass.length}`;
+  const selectedUser = selectUser.value;
+
+  if (selectedUser) {
+    const index = usersMass.map((e) => e.login).indexOf(selectedUser);
+    selectUser.options.remove(selectUser.selectedIndex);
+    usersMass.splice(index, 1);
+
+    userResult.innerHTML = `Милорд, нашу базу данных пожрал долгоносик. Пользователь ${selectedUser} больше не с нами`;
   } else {
-    userResult.innerHTML = `Базу пользователей опустошили до нас :(`;
+    userResult.innerHTML = `Базу пользователей опустошили до нас`;
   }
 }
 
