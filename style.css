@@ -38,3 +38,6 @@ select:invalid:required {
 input:invalid:required {
     border-color: darksalmon;
 }
+#massOfUser {
+    margin-bottom: 10px;
+}
