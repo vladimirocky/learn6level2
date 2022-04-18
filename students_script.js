@@ -9,17 +9,10 @@ let usersMass = [];
 
 // Напишите функцию-конструктор
 // которая позволит создавать объекты User
-function User (/* аргументы */) {
-    /**
-     * Ваш код тут
-     *
-    this.name = name;
-    this...
-    ...
-     this.login = login;
-     ...
-    *
-     */
+function User (name, age, login) {
+ this.name = name;
+ this.age = age;
+ this.login = login;
 }
 
 // Функция реализует вывод массива на экран
@@ -79,40 +72,62 @@ function printMass (anyArray, targTable) {
     targTable.appendChild(tableRes);
 }
 
-/**
- * Ваш код тут!
- *
- * Реализуйте функцию printUserMass
- * По аналогии с printUser
- * Только теперь функция будет работать с массивом объектов User
- * Нужно немного поменять цикл
- * Он также пройдется по всем элементам массива
- * Используйте for of или классический for
- * Однако в таблицу надо записывать не сам объект, а его свойство
- * свойтво -- логин пользователя
- *
- * В целом, в функции почти ничего не поменяется
- * за исключением пары строк приведенных ниже
- *
- * ...
- * так как нам точно нужен другой идетнификатор для второй таблице в документе
- * let oldTable = document.getElementById('tableRemovableUsers');
- * if (oldTable) {
- *     targTable.removeChild(oldTable);
- * }
- * ...
- * for (let i = 0; i < usersMass.length; i++){
- *     ...
- *     let valueTd = document.createElement('td');
- *     valueTd.innerText = anyArray[i].login;
- *     ..
- * }
- * ...
- * так как нам точно нужен другой идетнификатор для второй таблице в документе
- * tableRes.id = 'tableRemovableUsers';
- * ...
- *
-*/
+
+//  * Ваш код тут!
+//  * Реализуйте функцию printUserMass
+function printUserMass (anyArray, targTable)
+//  * По аналогии с printUser
+//  * Только теперь функция будет работать с массивом объектов User
+//  * Нужно немного поменять цикл
+//  * Он также пройдется по всем элементам массива
+//  * Используйте for of или классический for
+//  * Однако в таблицу надо записывать не сам объект, а его свойство
+//  * свойтво -- логин пользователя
+//  * В целом, в функции почти ничего не поменяется
+//  * за исключением пары строк приведенных ниже
+//  * ...
+//  * так как нам точно нужен другой идетнификатор для второй таблице в документе
+ let oldTable = document.getElementById('tableRemovableUsers');
+    if (oldTable) {
+     targTable.removeChild(oldTable);
+   }
+       // Создать элемент таблица
+       let tableRes = document.createElement('table')
+       // Строка индекса
+       let rawIndex = document.createElement('tr')
+       // Строка значений
+       let rawValue = document.createElement('tr');
+       // Ячейка заголовок
+       let index = document.createElement('th');
+       // Присвоим значение ячейки заголовка
+       index.innerText = 'Index';
+       // Ячейка значений
+       let valueTd = document.createElement('td');
+       // Присвоение значения ячейке значений
+       valueTd.innerText = 'Value';
+       // Добавить к строкам новые ячейки
+       rawIndex.appendChild(index);
+       rawValue.appendChild(valueTd);
+//  * ...
+ for (let i = 0; i < usersMass.length; i++){
+//  *     ...
+    let index = document.createElement('th');
+        index.innerText = [i].login;
+     let valueTd = document.createElement('td');
+     valueTd.innerText = anyArray[i].login;
+     rawIndex.appendChild(index);
+        rawValue.appendChild(valueTd);
+//  *     ..
+  }
+  tableRes.appendChild(rawIndex);
+    tableRes.appendChild(rawValue);
+//  * ...
+//  * так как нам точно нужен другой идетнификатор для второй таблице в документе
+  tableRes.id = 'tableRemovableUsers';
+  targTable.appendChild(tableRes);
+//  * ...
+ 
+
 
 // эта функция реализована для примера и уже работает
 function popMass () {
@@ -138,8 +153,8 @@ function shiftMass(){
     if (baseMass.length) {
         /**
          * Ваш код тут
-         * let result =
          */
+        let result = baseMass.shift();
 
         pop_shift_Value.innerHTML = '- ' + result;
         printMass(baseMass, massOnBoard);
@@ -156,6 +171,8 @@ function pushMass () {
          * Ваш код тут
          * примените push к baseMass
          */
+        let result = base.Mass.push();
+        pop_shift_Value.innerHTML = '- ' + result;
         printMass(baseMass, massOnBoard); // это выведет обновленный массив
     } else {
         alert("Введите значение!");
@@ -173,6 +190,8 @@ function unshiftMass () {
          * Вызовите printMass чтобы отобразить
          * новый массив
          */
+         let result = baseMass.unshift();
+         pop_shift_Value.innerHTML = '- ' + result;
     } else {
         alert("Введите значение!");
     }
@@ -184,6 +203,7 @@ function lengthMass(){
      * let result =
      * запишите в result длину массива
      */
+    let result = baseMass.length;
     lengthValue.innerHTML = " - " + result;
 }
 
@@ -191,31 +211,43 @@ function concatMass (){
     // В new_mass будет записан массив,
     // сформированный из значений поля ввода, записанных через запятую
     let new_mass = concatValue.value.split(',');
-    /**
-     * Ваш код тут
-     * Напишите условие, чтобы проверить
-     * что поле ввода не пустое
-     * Если поле вводе не пустое - примените concat
-     * метод массивов, позволяющий объединять один массив с другим
-     * вот так --
-     * основной_массив = основной_массив.concat(другой_массив)
-     *
-     * Если поле ввода пустое используйте окно alert
-     */
+    
+    //  * Ваш код тут
+    //  * Напишите условие, чтобы проверить
+    //  * что поле ввода не пустое
+    if(baseMass.length) {
+       let baseMass = baseMass.concat(new_mass)
+    }else{
+        alert("Массив уже пуст!")
+    }
+    //  * Если поле вводе не пустое - примените concat
+    //  * метод массивов, позволяющий объединять один массив с другим
+    //  * вот так --
+    //  * основной_массив = основной_массив.concat(другой_массив)
+    //  *
+    //  * Если поле ввода пустое используйте окно alert
+     
 }
 
 function searchMass (){
-    /**
-     * Ваш код тут
-     * Получите значение из элемента html с id -- searchValue
-     * Если значение непустое примените метод indexOf
-     * Этот метод позволит получить индекс элемента массива по значению
-     * массив.indexOf(значение)
-     * Если такого значения нет -- вернется -1
-     *
-     * Результат успешного поиска запишите в элементе html с id -- resIndex
-     * Если значение не найдено или поле пустое используйте окно alert
-     */
+    
+    //  * Ваш код тут
+    //  * Получите значение из элемента html с id -- searchValue
+    let searchInd = document.getElementById('searchValue').value;
+    //  * Если значение непустое примените метод indexOf
+    if (searchInd != " ") {
+        let result = baseMass.indexOf();
+        resIndex.innerHTML = " - " + result;
+    }else{
+        alert("поле пустое")
+    }
+    //  * Этот метод позволит получить индекс элемента массива по значению
+    //  * массив.indexOf(значение)
+    //  * Если такого значения нет -- вернется -1
+    //  *
+    //  * Результат успешного поиска запишите в элементе html с id -- resIndex
+    //  * Если значение не найдено или поле пустое используйте окно alert
+    //  
 }
 
 /**
