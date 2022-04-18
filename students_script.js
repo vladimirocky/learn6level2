@@ -9,17 +9,15 @@ let usersMass = [];
 
 // Напишите функцию-конструктор
 // которая позволит создавать объекты User
-function User (/* аргументы */) {
-    /**
-     * Ваш код тут
-     *
-    this.name = name;
-    this...
-    ...
+function User (LastName, FirstName, patronymic, login, age, growth) {
+
+     this.LastName = LastName;
+     this.FirstName = FirstName;
+     this.patronymic = patronymic;
      this.login = login;
-     ...
-    *
-     */
+     this.age = age;
+     this.growth = growth;
+
 }
 
 // Функция реализует вывод массива на экран
@@ -79,6 +77,53 @@ function printMass (anyArray, targTable) {
     targTable.appendChild(tableRes);
 }
 
+function printUserMass (anyArray, targTable) {
+
+    let oldTable = document.getElementById('tableRemovableUsers');
+
+    if (oldTable) {
+        targTable.removeChild(oldTable);
+    }
+
+     // Создать элемент таблица
+     let tableRes = document.createElement('table')
+     // Строка индекса
+     let rawIndex = document.createElement('tr')
+     // Строка значений
+     let rawValue = document.createElement('tr');
+     // Ячейка заголовок
+     let index = document.createElement('th');
+     // Присвоим значение ячейки заголовка
+     index.innerText = 'Имя, Фамилия';
+     // Ячейка значений
+     let valueTd = document.createElement('td');
+     // Присвоение значения ячейке значений
+     valueTd.innerText = 'Логин';
+     // Добавить к строкам новые ячейки
+     rawIndex.appendChild(index);
+     rawValue.appendChild(valueTd);
+
+    for (let i = 0; i < usersMass.length; i++){
+
+        let index = document.createElement('th');
+        index.innerText = anyArray[i].LastName + " " + anyArray[i].FirstName;
+
+        let valueTd = document.createElement('td');
+        valueTd.innerText = anyArray[i].login;
+
+        rawIndex.appendChild(index);
+        rawValue.appendChild(valueTd);
+    }
+
+    tableRes.appendChild(rawIndex);
+    tableRes.appendChild(rawValue);
+    // Добавим id таблицы
+    tableRes.id = 'tableRemovableUsers';
+    // Запишем таблицу на свое место
+    targTable.appendChild(tableRes);
+}
+
+
 /**
  * Ваш код тут!
  *
@@ -136,10 +181,8 @@ function shiftMass(){
     // мы получаем его длину
     // если длина 0 - выражение будет приведено к false
     if (baseMass.length) {
-        /**
-         * Ваш код тут
-         * let result =
-         */
+        
+        let result = baseMass.shift();
 
         pop_shift_Value.innerHTML = '- ' + result;
         printMass(baseMass, massOnBoard);
@@ -156,6 +199,8 @@ function pushMass () {
          * Ваш код тут
          * примените push к baseMass
          */
+
+        baseMass.push(pushVal);
         printMass(baseMass, massOnBoard); // это выведет обновленный массив
     } else {
         alert("Введите значение!");
@@ -173,17 +218,18 @@ function unshiftMass () {
          * Вызовите printMass чтобы отобразить
          * новый массив
          */
+
+        baseMass.unshift(shiftVal);
+        printMass(baseMass, massOnBoard);
     } else {
         alert("Введите значение!");
     }
 }
 
 function lengthMass(){
-    /**
-     * Ваш код тут
-     * let result =
-     * запишите в result длину массива
-     */
+   
+    let result = baseMass.length;
+    
     lengthValue.innerHTML = " - " + result;
 }
 
@@ -202,6 +248,14 @@ function concatMass (){
      *
      * Если поле ввода пустое используйте окно alert
      */
+
+    if (concatValue.value == "") {
+        alert("Поле ввода пустое!");
+    } else {
+        baseMass = baseMass.concat(new_mass);
+        concatValue.value = '';
+    }
+    printMass(baseMass, massOnBoard);
 }
 
 function searchMass (){
@@ -216,8 +270,121 @@ function searchMass (){
      * Результат успешного поиска запишите в элементе html с id -- resIndex
      * Если значение не найдено или поле пустое используйте окно alert
      */
+
+    if (searchValue.value){
+        let indexElem = baseMass.indexOf(searchValue.value);
+        searchValue.value = '';
+        if (indexElem != -1){
+            resIndex.innerHTML = indexElem;
+        }else{
+            resIndex.innerHTML = '- Элемент не найден!';
+        }
+    }else{
+        alert('Поле для поиска пустое!');
+    }
+    
 }
 
+function addUser() {
+     // это значит, что если хотябы одно поле пустое
+    // в isNotNull запишется пустое значение
+    let isNotNull = String(firstName.value) && String(secName.value);
+    let isNotNullNumber = Number(age.value) && Number(userHeight.value);
+    // проверяем что нет ни одного пустого поля инпут
+    if (isNotNull && isNotNullNumber) {
+        // создаем объект типа Cubik
+        let NewUser = new User(
+            firstName.value,
+            lastName.value,
+            secName.value,
+            login.value,
+            age.value,
+            userHeight.value        
+        );
+        // будем шспользовать id объета из массива
+        // для дочерних элементов селектора
+        let id = usersMass.length;
+        // добавляем новый элемент в массив
+        usersMass.push(NewUser); 
+
+        // создаем дочерний элемент селектора -- строка выпадающего списка
+        let opt = document.createElement("option");
+        // value позволит в дальнейшем идентифицировать выбранный элемент селектора
+        // в данном длучае будет соответсвовать индексу в массиве
+        opt.value = String(id);
+        // текст - то что увидит пользователь в выпадающем списке
+        opt.text = NewUser.login;
+        // теперь к элементу документа мы добавили новый дочерний элемент
+        selectUser.appendChild(opt);
+
+        // сотрем ненужный текст в input-ах в случае успеха
+        firstName.value = '';
+        secName.value = '';
+        lastName.value = '';
+        login.value = '';
+        age.value = '';
+        userHeight.value = '';
+    }
+    else {
+        // если не все поля заполнены - вызываем окно alert
+        alert("Введите значения! Убедитесь что поля не пустые");
+    }
+    printUserMass(usersMass, massOfUser);
+}
+
+function midleHeight() {
+
+    let sum = 0;
+    let lenghtN = usersMass.length;
+
+    if (usersMass.length > 0) {
+
+        for (let i = 0; i < usersMass.length; i++) {
+
+            sum = sum + Number(usersMass[i].growth);
+
+        }
+        sum = sum / lenghtN;
+        userResult.innerHTML = "средний рост - " + sum;
+    } else {
+
+        userResult.innerHTML = "Нет ни одного пользователя!";
+
+    }
+
+}
+
+function countUsers() {
+
+    let result = usersMass.length;
+    
+    userResult.innerHTML = "количество пользователей - " + result;
+}
+
+function midleAge() {
+    let sum = 0;
+    let ageN = usersMass.length;
+    
+    if (usersMass.length > 0) {
+
+        for (let i = 0; i < usersMass.length; i++) {
+
+            sum = sum + Number(usersMass[i].age);
+            console.log(sum);
+        }
+        sum = sum / ageN;
+        userResult.innerHTML = "средний возраст - " + sum;
+    } else {
+
+        userResult.innerHTML = "Нет ни одного пользователя!";
+
+    }
+
+}
+
+function myFunc() {
+
+}
 /**
  * Ваш код тут
  *
@@ -238,8 +405,5 @@ function searchMass (){
  */
 
 document.addEventListener("DOMContentLoaded", function () { printMass(baseMass, massOnBoard);});
-/**
- * Внимание!
- * Раскомментировать, когда реализуете printUserMass()
+
 document.addEventListener("DOMContentLoaded", function () { printUserMass(usersMass, massOfUser);});
-*/
