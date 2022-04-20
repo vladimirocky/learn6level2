@@ -75,7 +75,7 @@ function printMass (anyArray, targTable) {
 
 //  * Ваш код тут!
 //  * Реализуйте функцию printUserMass
-function printUserMass (anyArray, targTable)
+function printUserMass (anyArray, targTable) {
 //  * По аналогии с printUser
 //  * Только теперь функция будет работать с массивом объектов User
 //  * Нужно немного поменять цикл
@@ -87,46 +87,46 @@ function printUserMass (anyArray, targTable)
 //  * за исключением пары строк приведенных ниже
 //  * ...
 //  * так как нам точно нужен другой идетнификатор для второй таблице в документе
- let oldTable = document.getElementById('tableRemovableUsers');
+    let oldTable = document.getElementById('tableRemovableUsers');
     if (oldTable) {
-     targTable.removeChild(oldTable);
-   }
-       // Создать элемент таблица
-       let tableRes = document.createElement('table')
-       // Строка индекса
-       let rawIndex = document.createElement('tr')
-       // Строка значений
-       let rawValue = document.createElement('tr');
-       // Ячейка заголовок
-       let index = document.createElement('th');
-       // Присвоим значение ячейки заголовка
-       index.innerText = 'Index';
-       // Ячейка значений
-       let valueTd = document.createElement('td');
-       // Присвоение значения ячейке значений
-       valueTd.innerText = 'Value';
-       // Добавить к строкам новые ячейки
-       rawIndex.appendChild(index);
-       rawValue.appendChild(valueTd);
-//  * ...
- for (let i = 0; i < usersMass.length; i++){
-//  *     ...
+        targTable.removeChild(oldTable);
+    }
+    // Создать элемент таблица
+    let tableRes = document.createElement('table')
+    // Строка индекса
+    let rawIndex = document.createElement('tr')
+    // Строка значений
+    let rawValue = document.createElement('tr');
+    // Ячейка заголовок
     let index = document.createElement('th');
+    // Присвоим значение ячейки заголовка
+    index.innerText = 'Index';
+    // Ячейка значений
+    let valueTd = document.createElement('td');
+    // Присвоение значения ячейке значений
+    valueTd.innerText = 'Value';
+    // Добавить к строкам новые ячейки
+    rawIndex.appendChild(index);
+    rawValue.appendChild(valueTd);
+//  * ...
+    for (let i = 0; i < usersMass.length; i++) {
+//  *     ...
+        let index = document.createElement('th');
         index.innerText = [i].login;
-     let valueTd = document.createElement('td');
-     valueTd.innerText = anyArray[i].login;
-     rawIndex.appendChild(index);
+        let valueTd = document.createElement('td');
+        valueTd.innerText = anyArray[i].login;
+        rawIndex.appendChild(index);
         rawValue.appendChild(valueTd);
 //  *     ..
-  }
-  tableRes.appendChild(rawIndex);
+    }
+    tableRes.appendChild(rawIndex);
     tableRes.appendChild(rawValue);
 //  * ...
 //  * так как нам точно нужен другой идетнификатор для второй таблице в документе
-  tableRes.id = 'tableRemovableUsers';
-  targTable.appendChild(tableRes);
+    tableRes.id = 'tableRemovableUsers';
+    targTable.appendChild(tableRes);
 //  * ...
- 
+}
 
 
 // эта функция реализована для примера и уже работает
@@ -171,6 +171,12 @@ function pushMass () {
          * Ваш код тут
          * примените push к baseMass
          */
+        /**
+         * * --------------------------------------------
+         * Что такое base.Mass ?
+         * метод пуш должен принимать какое-то значение
+         * * --------------------------------------------
+         */
         let result = base.Mass.push();
         pop_shift_Value.innerHTML = '- ' + result;
         printMass(baseMass, massOnBoard); // это выведет обновленный массив
@@ -189,6 +195,11 @@ function unshiftMass () {
          * примените unshift к baseMass
          * Вызовите printMass чтобы отобразить
          * новый массив
+         */
+        /**
+         * --------------------------------------------
+         * в unshift нужно что-то пердать чтоб работало
+         * --------------------------------------------
          */
          let result = baseMass.unshift();
          pop_shift_Value.innerHTML = '- ' + result;
@@ -210,6 +221,11 @@ function lengthMass(){
 function concatMass (){
     // В new_mass будет записан массив,
     // сформированный из значений поля ввода, записанных через запятую
+    /**
+     * * --------------------------------------------
+     * concatValue надо получить сначала, иначе что тут сплитить?
+     * * --------------------------------------------
+     */
     let new_mass = concatValue.value.split(',');
     
     //  * Ваш код тут
@@ -218,6 +234,11 @@ function concatMass (){
     if(baseMass.length) {
        let baseMass = baseMass.concat(new_mass)
     }else{
+        /**
+         * * --------------------------------------------
+         * Зачем? мы же не удаляем а добавляем значения
+         * * --------------------------------------------
+         */
         alert("Массив уже пуст!")
     }
     //  * Если поле вводе не пустое - примените concat
@@ -236,6 +257,12 @@ function searchMass (){
     let searchInd = document.getElementById('searchValue').value;
     //  * Если значение непустое примените метод indexOf
     if (searchInd != " ") {
+        /**
+         * * --------------------------------------------
+         * indexOf должен какое-то значение принимать
+         * что мы ищем то?
+         * * --------------------------------------------
+         */
         let result = baseMass.indexOf();
         resIndex.innerHTML = " - " + result;
     }else{
