@@ -309,6 +309,7 @@ function addUser() {
 
         // создаем дочерний элемент селектора -- строка выпадающего списка
         let opt = document.createElement("option");
+        opt.setAttribute("id", id);
         // value позволит в дальнейшем идентифицировать выбранный элемент селектора
         // в данном длучае будет соответсвовать индексу в массиве
         opt.value = String(id);
@@ -383,7 +384,12 @@ function midleAge() {
 }
 
 function myFunc() {
+    let idUser = selectUser.value
+    usersMass.splice(idUser);
 
+    let deleteUser = document.getElementById(idUser);
+    deleteUser.remove();
+    printUserMass(usersMass, massOfUser);
 }
 /**
  * Ваш код тут
