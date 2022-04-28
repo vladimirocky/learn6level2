@@ -260,6 +260,10 @@ function concatMass (){
     let new_mass = concatValue.value.split(',');
     let isNoTNull = Numbernew_mass.value;
     if (isNotNull) {
+    old_mass = old_mass.concat(new_mass);
+    }
+    else{
+        alert('Enter items!')
     }
 }
      /**
