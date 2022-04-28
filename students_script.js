@@ -9,7 +9,9 @@ let usersMass = [];
 
 // Напишите функцию-конструктор
 // которая позволит создавать объекты User
-function User (/* аргументы */) {
+function User (login, name) {
+    this.name = name;
+    this.login = login;
     /**
      * Ваш код тут
      *
@@ -21,9 +23,31 @@ function User (/* аргументы */) {
     *
      */
 }
-
+function addUser(){
+    let isNotNull = userName.value && userLogin.value;
+    if (isNotNull) {
+    let trueMass = new User (
+        name.value,
+        login.value,
+        )
+    }
+}
 // Функция реализует вывод массива на экран
 // Если вы изменили массив - вызовите эту функцию чтобы отобразить актальные значения
+
+
+
+function UserName () {
+    let id = selectUser.value;
+    if (id) {
+        let nameUser = baseMass[id];
+        targtable.innerHTML = nameUser;
+    }
+    else {
+        alert("Не выбран пользователь!");
+    }
+}
+
 /**
  *
  * @param anyArray - массив с данными которые будем отображать
@@ -38,9 +62,9 @@ function printMass (anyArray, targTable) {
     }
 
     // Создать элемент таблица
-    let tableRes = document.createElement('table')
+    let tableRes = document.createElement('table');
     // Строка индекса
-    let rawIndex = document.createElement('tr')
+    let rawIndex = document.createElement('tr');
     // Строка значений
     let rawValue = document.createElement('tr');
     // Ячейка заголовок
@@ -68,6 +92,7 @@ function printMass (anyArray, targTable) {
         // Добавить к строкам новые ячейки
         rawIndex.appendChild(index);
         rawValue.appendChild(valueTd);
+
     }
 
     // Записываем в теблицу строки со значениями
@@ -77,7 +102,9 @@ function printMass (anyArray, targTable) {
     tableRes.id = 'tableRemovable';
     // Запишем таблицу на свое место
     targTable.appendChild(tableRes);
-}
+
+
+
 
 /**
  * Ваш код тут!
@@ -113,6 +140,41 @@ function printMass (anyArray, targTable) {
  * ...
  *
 */
+    /**
+     * @param User
+     * @param targTable
+     */
+
+    function printUser (User, targTable) {
+        let oldTable = document.getElementById('tableRemovableUsers')
+        if (oldTable) {
+            targTable.removeChild(oldTable);
+        }
+        let tableRes = document.createElement('table');
+        let rawIndex = document.createElement('tr');
+        let rawValue = document.createElement ('tr');
+        let index = document.createElement('th');
+        index.innerText = 'Index';
+        let valueTd = document.createElement('td');
+        valueTd.innerText = 'Value';
+        rawIndex.appendChild(index);
+        rawIndex.appendChild(valueTd);
+
+        for (let i=0; i<usersMass.length;i++){
+            let index = document.createElement('th');
+            index.innetText = key_elem;
+            let valueTd = document.createElement('td');
+            valueTd.innerText = Users[i].login;
+            rawIndex.appendChild(index);
+            rawValue.appendChild(valueTd);
+
+        }
+        tableRes.appenChild(rawIndex);
+        tableRes.appenChild(rawValue);
+        tableRes.id = 'tableRemovableUsers';
+        tarTable.appendChild(tableRes);
+
+    }
 
 // эта функция реализована для примера и уже работает
 function popMass () {
@@ -140,7 +202,7 @@ function shiftMass(){
          * Ваш код тут
          * let result =
          */
-
+        let result = baseMass.shift();
         pop_shift_Value.innerHTML = '- ' + result;
         printMass(baseMass, massOnBoard);
     } else {
@@ -156,6 +218,7 @@ function pushMass () {
          * Ваш код тут
          * примените push к baseMass
          */
+        let result = baseMass.push();
         printMass(baseMass, massOnBoard); // это выведет обновленный массив
     } else {
         alert("Введите значение!");
@@ -173,6 +236,9 @@ function unshiftMass () {
          * Вызовите printMass чтобы отобразить
          * новый массив
          */
+
+        let result = baseMass.unshift();
+        printMass(baseMass, massOnBoard);
     } else {
         alert("Введите значение!");
     }
@@ -184,6 +250,7 @@ function lengthMass(){
      * let result =
      * запишите в result длину массива
      */
+    let result = baseMass.length;
     lengthValue.innerHTML = " - " + result;
 }
 
@@ -191,7 +258,11 @@ function concatMass (){
     // В new_mass будет записан массив,
     // сформированный из значений поля ввода, записанных через запятую
     let new_mass = concatValue.value.split(',');
-    /**
+    let isNoTNull = Numbernew_mass.value;
+    if (isNotNull) {
+    }
+}
+     /**
      * Ваш код тут
      * Напишите условие, чтобы проверить
      * что поле ввода не пустое
