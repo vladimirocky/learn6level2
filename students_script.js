@@ -258,12 +258,12 @@ function concatMass (){
     // В new_mass будет записан массив,
     // сформированный из значений поля ввода, записанных через запятую
     let new_mass = concatValue.value.split(',');
-    let isNoTNull = Numbernew_mass.value;
+    let isNoTNull = (new_mass.value);
     if (isNotNull) {
     old_mass = old_mass.concat(new_mass);
     }
     else{
-        alert('Enter items!')
+        alert('Пустое поле, введите значения!')
     }
 }
      /**
@@ -280,6 +280,17 @@ function concatMass (){
 }
 
 function searchMass (){
+    let newMass = document.getElementById('searchValue');
+    let isNotNull = (newMass.value);
+    if (isNotNull) {
+        let result = newMass.indexOf[i];
+        resIndex.innerHeight = result;
+    }
+        else {
+            newMass[i] = -1;
+            alert('Значение не найдено или поле пустое!');
+        }
+
     /**
      * Ваш код тут
      * Получите значение из элемента html с id -- searchValue
