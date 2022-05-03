@@ -304,6 +304,28 @@ function searchMass (){
      */
 }
 
+
+
+
+
+/**
+ * Ваш код тут
+ *
+ * Внимательно посмотрите на реализацию в файле script.js
+ * Посмотрите на код в этом вайле выше
+ *
+ * Используйте написанную вами функцию printUserMass() для массива usersMass
+ * В этот массив и записывайте объекты User
+ *
+ * селектор -- элемент html "выпадающий список"
+ *
+ * По аналогии реализуйте следующие функции
+ * addUser() -- добавит нового пользователя, обновит массив и селектор
+ * midleHeight() -- выведет средний рост пользователей
+ * midleAge() -- выведет средний возраст
+ * countUsers() -- выведет длину массива пользователей
+ * myFunc() - функция которая работает с селектором, придумайте что сделать самостоятельно
+ */
 function printUser (User, targTable) {
     let oldTable = document.getElementById('tableRemovableUsers')
     if (oldTable) {
@@ -332,49 +354,58 @@ function printUser (User, targTable) {
     tableRes.appenChild(rawValue);
     tableRes.id = 'tableRemovableUsers';
     tarTable.appendChild(tableRes);
-    }
+}
 
-    function addUser () {
+function addUser () {
 
     let addUser = new User(
-        index.value;
-        login.value;
-
-    )
-    let id = userMass.length;
+        index.value,
+        login.value,
+        age.value,
+    );
+    let id = usersMass.length;
     userMass.push(addUser);
 
     let opt = document.createElement("option");
     opt.value = String(id);
-    opt.text  = newMass.name;
+    opt.text = newMass.name;
     selectMass.appendChild(opt);
     index.value = '';
     login.value = '';
+    age.value = '';
+    }
     else
-{
-    alert("Введите значения!")
-}
+    {
+        alert("Введите значения!")
+    }
 }
 
-/**
- * Ваш код тут
- *
- * Внимательно посмотрите на реализацию в файле script.js
- * Посмотрите на код в этом вайле выше
- *
- * Используйте написанную вами функцию printUserMass() для массива usersMass
- * В этот массив и записывайте объекты User
- *
- * селектор -- элемент html "выпадающий список"
- *
- * По аналогии реализуйте следующие функции
- * addUser() -- добавит нового пользователя, обновит массив и селектор
- * midleHeight() -- выведет средний рост пользователей
- * midleAge() -- выведет средний возраст
- * countUsers() -- выведет длину массива пользователей
- * myFunc() - функция которая работает с селектором, придумайте что сделать самостоятельно
- */
+function middleheight() {
+    let isNotNull = Number(index.value) && Number(login.value);
+    if (isNotNull) {
+        for (let index in usersMass)
+            let summAges += age.value;
+            let middleheight = summAges / usersMass.length;
+            let Countusers = usersMass.length;
+            Middleheight.innerhtml = middleheight;
+            Countusers.innerhtml = usersMass.length;
+    }
+    else {
+        ("Введите значения!")
+    }
+    }
 
+function findperson() {
+    let person = document.getElementById('person');
+       if (person) {
+           usersMass.values();
+           alert("Такой человек есть в списке!")
+       }
+       else {
+        alert("Такой человек в списке отсутствует!")
+    }
+
+}
 document.addEventListener("DOMContentLoaded", function () { printMass(baseMass, massOnBoard);});
 /**
  * Внимание!
