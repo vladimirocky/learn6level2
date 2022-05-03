@@ -304,6 +304,58 @@ function searchMass (){
      */
 }
 
+function printUser (User, targTable) {
+    let oldTable = document.getElementById('tableRemovableUsers')
+    if (oldTable) {
+        targTable.removeChild(oldTable);
+    }
+    let tableRes = document.createElement('table');
+    let rawIndex = document.createElement('tr');
+    let rawValue = document.createElement ('tr');
+    let index = document.createElement('th');
+    index.innerText = 'Index';
+    let valueTd = document.createElement('td');
+    valueTd.innerText = 'Value';
+    rawIndex.appendChild(index);
+    rawIndex.appendChild(valueTd);
+
+    for (let i=0; i<usersMass.length;i++){
+        let index = document.createElement('th');
+        index.innetText = key_elem;
+        let valueTd = document.createElement('td');
+        valueTd.innerText = Users[i].login;
+        rawIndex.appendChild(index);
+        rawValue.appendChild(valueTd);
+
+    }
+    tableRes.appenChild(rawIndex);
+    tableRes.appenChild(rawValue);
+    tableRes.id = 'tableRemovableUsers';
+    tarTable.appendChild(tableRes);
+    }
+
+    function addUser () {
+
+    let addUser = new User(
+        index.value;
+        login.value;
+
+    )
+    let id = userMass.length;
+    userMass.push(addUser);
+
+    let opt = document.createElement("option");
+    opt.value = String(id);
+    opt.text  = newMass.name;
+    selectMass.appendChild(opt);
+    index.value = '';
+    login.value = '';
+    else
+{
+    alert("Введите значения!")
+}
+}
+
 /**
  * Ваш код тут
  *
