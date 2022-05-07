@@ -9,17 +9,13 @@ let usersMass = [];
 
 // Напишите функцию-конструктор
 // которая позволит создавать объекты User
-function User (/* аргументы */) {
-    /**
-     * Ваш код тут
-     *
-    this.name = name;
-    this...
-    ...
-     this.login = login;
-     ...
-    *
-     */
+function User (x,y,z,log,age,height) {
+    this.name = x;
+    this.secName = y;
+    this.lastName = z;
+    this.login = log;
+    this.age = age;
+    this.userHeight = height;
 }
 
 // Функция реализует вывод массива на экран
