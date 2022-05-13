@@ -1,3 +1,11 @@
+/**
+ * -------------------------------------------------------
+ * 1. Беда с фигурными скобками!
+ * 2. Какую из двух printUser планировалось использовать?
+ * -------------------------------------------------------
+ */
+
+
 // init
 /* Читайте комментарии и допишите код где необходимо */
 
@@ -12,7 +20,20 @@ let usersMass = [];
 function User (login, name) {
     this.name = name;
     this.login = login;
+
     /**
+     * -------------------------------------------------------
+     * 3. А как же поля для:
+     *  - отчество
+     *  - фамилия
+     *  - возраст
+     *  - рост
+     *  ???
+     *  4. Как минимум возраст и рост нужны чтобы считать:
+     *   - средний рост
+     *   - средний возраст
+     *
+     *   -------------------------------------------------------
      * Ваш код тут
      *
     this.name = name;
@@ -36,7 +57,13 @@ function addUser(){
 // Если вы изменили массив - вызовите эту функцию чтобы отобразить актальные значения
 
 
-
+/**
+ * -------------------------------------------------------
+ * 5. Какая-то недоделанная функция:
+ *  - нигде не используется
+ *  - "targtable.innerHTML = nameUser" заменит весь html на одно значение nameUser
+ * -------------------------------------------------------
+ */
 function UserName () {
     let id = selectUser.value;
     if (id) {
@@ -104,7 +131,7 @@ function printMass (anyArray, targTable) {
     targTable.appendChild(tableRes);
 
 
-
+}
 
 /**
  * Ваш код тут!
@@ -146,6 +173,7 @@ function printMass (anyArray, targTable) {
      */
 
     function printUser (User, targTable) {
+
         let oldTable = document.getElementById('tableRemovableUsers')
         if (oldTable) {
             targTable.removeChild(oldTable);
@@ -162,6 +190,14 @@ function printMass (anyArray, targTable) {
 
         for (let i=0; i<usersMass.length;i++){
             let index = document.createElement('th');
+            /**
+             * -------------------------------------------------------
+             * 6. Верояно индексом будет i а не key_elem
+             *
+             * что таке key_elem,Users, tarTable непонятно...
+             * функция ничего о них не знает
+             * -------------------------------------------------------
+             */
             index.innetText = key_elem;
             let valueTd = document.createElement('td');
             valueTd.innerText = Users[i].login;
@@ -259,8 +295,13 @@ function concatMass (){
     // сформированный из значений поля ввода, записанных через запятую
     let new_mass = concatValue.value.split(',');
     let isNoTNull = (new_mass.value);
+    /**
+     * -------------------------------------------------------
+     * 7. isNoTNull и isNotNull это разные имена переменных
+     * -------------------------------------------------------
+     */
     if (isNotNull) {
-    old_mass = old_mass.concat(new_mass);
+        old_mass = old_mass.concat(new_mass);
     }
     else{
         alert('Пустое поле, введите значения!')
@@ -277,12 +318,18 @@ function concatMass (){
      *
      * Если поле ввода пустое используйте окно alert
      */
-}
+
+} // 8. Что закрывает эта кавычка?
 
 function searchMass (){
     let newMass = document.getElementById('searchValue');
     let isNotNull = (newMass.value);
     if (isNotNull) {
+        /**
+         * -------------------------------------------------------
+         * 9. indexOf() это метод, а не коллекция, поэтому квадратные скобки тут указаны ошибочно
+         * 10. Откуда взять i ?
+         */
         let result = newMass.indexOf[i];
         resIndex.innerHeight = result;
     }
@@ -326,6 +373,11 @@ function searchMass (){
  * countUsers() -- выведет длину массива пользователей
  * myFunc() - функция которая работает с селектором, придумайте что сделать самостоятельно
  */
+/**
+ * ------------------------------------------------------
+ * 11. Такая функция уже есть, с тем же именем и ошибками
+ * ------------------------------------------------------
+ */
 function printUser (User, targTable) {
     let oldTable = document.getElementById('tableRemovableUsers')
     if (oldTable) {
@@ -359,6 +411,12 @@ function printUser (User, targTable) {
 function addUser () {
 
     let addUser = new User(
+        /**
+         * ------------------------------------------------------
+         * 12. Откуда берется index ?
+         * ------------------------------------------------------
+         */
+
         index.value,
         login.value,
         age.value,
@@ -374,11 +432,22 @@ function addUser () {
     login.value = '';
     age.value = '';
     }
+/**
+ * ------------------------------------------------------
+ * 13. Если есть else то где if ?
+ * ------------------------------------------------------
+ */
     else
     {
         alert("Введите значения!")
     }
 }
+/**
+ * ------------------------------------------------------
+ * 14. Такой функции в index.html не используется
+ * там есть - midleHeight()
+ * ------------------------------------------------------
+ */
 
 function middleheight() {
     let isNotNull = Number(index.value) && Number(login.value);
@@ -409,6 +478,9 @@ function findperson() {
 document.addEventListener("DOMContentLoaded", function () { printMass(baseMass, massOnBoard);});
 /**
  * Внимание!
+ * ------------------------------------------------
+ *  :(
+ * ------------------------------------------------
  * Раскомментировать, когда реализуете printUserMass()
 document.addEventListener("DOMContentLoaded", function () { printUserMass(usersMass, massOfUser);});
 */
