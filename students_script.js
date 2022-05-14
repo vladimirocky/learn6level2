@@ -2,6 +2,11 @@
  * -------------------------------------------------------
  * 1. Беда с фигурными скобками!
  * 2. Какую из двух printUser планировалось использовать?
+ * 
+ * Не работает ни одна кнопка в html файле для управления пользователмяи. хотя написано все по аналогии с примером с кубом, не могу найти ошибку. 
+ * скрипт вроде прописан в html, подключен 
+ * JS исправил, а проверить не могу. консоль браузера выдает index.html:85 Uncaught ReferenceError: addUser is not defined
+    at HTMLButtonElement.onclick, хотя функция в button onclick прописана по аналогии с примером
  * -------------------------------------------------------
  */
 
@@ -17,9 +22,13 @@ let usersMass = [];
 
 // Напишите функцию-конструктор
 // которая позволит создавать объекты User
-function User (login, name) {
+function User (name, secName, lastName, login, age, userHeight) {
     this.name = name;
+    this.secName = secName;
+    this.lastName = lastName;
     this.login = login;
+    this.age = age;
+
 
     /**
      * -------------------------------------------------------
@@ -45,13 +54,33 @@ function User (login, name) {
      */
 }
 function addUser(){
-    let isNotNull = userName.value && userLogin.value;
+    let isNotNull = name.value && secName.value && lastName.value && login.value && age.value && userHeight.value;
     if (isNotNull) {
-    let trueMass = new User (
+    let newUser = new User (
         name.value,
+        secName.value,
+        lastName.value,
         login.value,
-        )
+        age.value,
+        userHeight.value
+        );
+    let id = usersMass.length;
+    usersMass.push(newUser);
+    let opt = document.createElement("option");
+    opt.value - String(id);
+    opt.text = newUser.name;
+    selectUser.appenChild(opt);
+    name.value = '';
+    secName.value = '';
+    lastName.value = '';
+    login.value = '';
+    age.value = '';
+    userHeight = '';
     }
+    else {
+        alert("Введите пользователя!")
+    }
+
 }
 // Функция реализует вывод массива на экран
 // Если вы изменили массив - вызовите эту функцию чтобы отобразить актальные значения
@@ -64,16 +93,7 @@ function addUser(){
  *  - "targtable.innerHTML = nameUser" заменит весь html на одно значение nameUser
  * -------------------------------------------------------
  */
-function UserName () {
-    let id = selectUser.value;
-    if (id) {
-        let nameUser = baseMass[id];
-        targtable.innerHTML = nameUser;
-    }
-    else {
-        alert("Не выбран пользователь!");
-    }
-}
+ 
 
 /**
  *
@@ -184,7 +204,7 @@ function printMass (anyArray, targTable) {
         let index = document.createElement('th');
         index.innerText = 'Index';
         let valueTd = document.createElement('td');
-        valueTd.innerText = 'Value';
+        valueTd.innerText = 'Login';
         rawIndex.appendChild(index);
         rawIndex.appendChild(valueTd);
 
@@ -195,12 +215,13 @@ function printMass (anyArray, targTable) {
              * 6. Верояно индексом будет i а не key_elem
              *
              * что таке key_elem,Users, tarTable непонятно...
-             * функция ничего о них не знает
+             * функция ничего о них не знает 
+             * ИСПРАВЛЕНО, в index записываем порядковый номер, правильно понимаю?
              * -------------------------------------------------------
              */
-            index.innetText = key_elem;
+            index.innerText = i;
             let valueTd = document.createElement('td');
-            valueTd.innerText = Users[i].login;
+            valueTd.innerText = User[i].login;
             rawIndex.appendChild(index);
             rawValue.appendChild(valueTd);
 
@@ -294,10 +315,11 @@ function concatMass (){
     // В new_mass будет записан массив,
     // сформированный из значений поля ввода, записанных через запятую
     let new_mass = concatValue.value.split(',');
-    let isNoTNull = (new_mass.value);
+    let isNotNull = (new_mass.value);
     /**
      * -------------------------------------------------------
      * 7. isNoTNull и isNotNull это разные имена переменных
+     * ИСПРАВЛЕНО
      * -------------------------------------------------------
      */
     if (isNotNull) {
@@ -319,7 +341,8 @@ function concatMass (){
      * Если поле ввода пустое используйте окно alert
      */
 
-} // 8. Что закрывает эта кавычка?
+ // 8. Что закрывает эта кавычка? - ИСПРАВЛЕНО
+
 
 function searchMass (){
     let newMass = document.getElementById('searchValue');
@@ -328,13 +351,14 @@ function searchMass (){
         /**
          * -------------------------------------------------------
          * 9. indexOf() это метод, а не коллекция, поэтому квадратные скобки тут указаны ошибочно
-         * 10. Откуда взять i ?
-         */
-        let result = newMass.indexOf[i];
+         * 10. Откуда взять i ? указал массив для поиска usersMass, а ищем newMass
+            ИСПРАВЛЕНО 
+        */
+        let result = usersMass.indexOf(newMass);
         resIndex.innerHeight = result;
     }
         else {
-            newMass[i] = -1;
+            result = -1;
             alert('Значение не найдено или поле пустое!');
         }
 
@@ -378,51 +402,24 @@ function searchMass (){
  * 11. Такая функция уже есть, с тем же именем и ошибками
  * ------------------------------------------------------
  */
-function printUser (User, targTable) {
-    let oldTable = document.getElementById('tableRemovableUsers')
-    if (oldTable) {
-        targTable.removeChild(oldTable);
-    }
-    let tableRes = document.createElement('table');
-    let rawIndex = document.createElement('tr');
-    let rawValue = document.createElement ('tr');
-    let index = document.createElement('th');
-    index.innerText = 'Index';
-    let valueTd = document.createElement('td');
-    valueTd.innerText = 'Value';
-    rawIndex.appendChild(index);
-    rawIndex.appendChild(valueTd);
-
-    for (let i=0; i<usersMass.length;i++){
-        let index = document.createElement('th');
-        index.innetText = key_elem;
-        let valueTd = document.createElement('td');
-        valueTd.innerText = Users[i].login;
-        rawIndex.appendChild(index);
-        rawValue.appendChild(valueTd);
-
-    }
-    tableRes.appenChild(rawIndex);
-    tableRes.appenChild(rawValue);
-    tableRes.id = 'tableRemovableUsers';
-    tarTable.appendChild(tableRes);
-}
 
 function addUser () {
 
     let addUser = new User(
         /**
          * ------------------------------------------------------
-         * 12. Откуда берется index ?
+         * 12. Откуда берется index ? ИСПРАВЛЕНО
          * ------------------------------------------------------
          */
-
-        index.value,
-        login.value,
-        age.value,
+         name.value,
+         secName.value,
+         lastName.value,
+         login.value,
+         age.value,
+         userHeight.value
     );
     let id = usersMass.length;
-    userMass.push(addUser);
+    usersMass.push(addUser);
 
     let opt = document.createElement("option");
     opt.value = String(id);
@@ -434,29 +431,31 @@ function addUser () {
     }
 /**
  * ------------------------------------------------------
- * 13. Если есть else то где if ?
+ * 13. Если есть else то где if ? УБРАЛ else, без вывода alert 
  * ------------------------------------------------------
  */
-    else
-    {
-        alert("Введите значения!")
-    }
-}
+  
+
 /**
  * ------------------------------------------------------
  * 14. Такой функции в index.html не используется
- * там есть - midleHeight()
+ * там есть - midleHeight() ИСПРАВЛЕНО
  * ------------------------------------------------------
  */
 
-function middleheight() {
-    let isNotNull = Number(index.value) && Number(login.value);
+function midleHeight() {
+    let isNotNull = Number(age.value) && Number(height.value);
     if (isNotNull) {
         for (let index in usersMass)
             let summAges += age.value;
-            let middleheight = summAges / usersMass.length;
+            /**
+             * подскажите почему формулу сложения выделяет красным? 
+             * разные варианты пробовал, все равно выделяет.сложение 
+             * кажется мне правильным...
+             */
+            let midleHeight = summAges / usersMass.length;
             let Countusers = usersMass.length;
-            Middleheight.innerhtml = middleheight;
+            midleHeight.innerhtml = midleHeight;
             Countusers.innerhtml = usersMass.length;
     }
     else {
