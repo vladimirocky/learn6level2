@@ -17,9 +17,15 @@ let usersMass = [];
 
 // Напишите функцию-конструктор
 // которая позволит создавать объекты User
-function User (login, name) {
+function User (login, name, age, growth, secName, lastName) {
     this.name = name;
     this.login = login;
+    this.age = age;
+    this.growth = growth;
+    this.secName = secName;
+    this.lastName = lastName;
+
+    
 
     /**
      * -------------------------------------------------------
@@ -45,12 +51,30 @@ function User (login, name) {
      */
 }
 function addUser(){
-    let isNotNull = userName.value && userLogin.value;
+    let isNotNull = name.value && secName.value && lastName.value && login.value && age.value && growth.value;
     if (isNotNull) {
     let trueMass = new User (
         name.value,
+        secName.value,
+        lastName.value,
         login.value,
+        age.value,
+        growth.value,
         )
+        let id = usersMass.length;
+        usersMass.push(trueMass);
+        let opt = document.createElement("option");
+        opt.value - String(id);
+        opt.text = trueMass.name;
+        selectUser.appenChild(opt);
+        name.value = '';
+        secName.value = '';
+        lastName.value = '';
+        login.value = '';
+        age.value = '';
+        growth = '';
+    }else {
+        alert("Пусто!")
     }
 }
 // Функция реализует вывод массива на экран
@@ -294,10 +318,10 @@ function concatMass (){
     // В new_mass будет записан массив,
     // сформированный из значений поля ввода, записанных через запятую
     let new_mass = concatValue.value.split(',');
-    let isNoTNull = (new_mass.value);
+    let isNotNull = (new_mass.value);
     /**
      * -------------------------------------------------------
-     * 7. isNoTNull и isNotNull это разные имена переменных
+    
      * -------------------------------------------------------
      */
     if (isNotNull) {
@@ -319,7 +343,7 @@ function concatMass (){
      * Если поле ввода пустое используйте окно alert
      */
 
-} // 8. Что закрывает эта кавычка?
+ 
 
 function searchMass (){
     let newMass = document.getElementById('searchValue');
@@ -329,12 +353,13 @@ function searchMass (){
          * -------------------------------------------------------
          * 9. indexOf() это метод, а не коллекция, поэтому квадратные скобки тут указаны ошибочно
          * 10. Откуда взять i ?
+         * +
          */
-        let result = newMass.indexOf[i];
+        let result = newMass.indexOf(newMass);
         resIndex.innerHeight = result;
     }
         else {
-            newMass[i] = -1;
+            result = -1;
             alert('Значение не найдено или поле пустое!');
         }
 
@@ -378,48 +403,51 @@ function searchMass (){
  * 11. Такая функция уже есть, с тем же именем и ошибками
  * ------------------------------------------------------
  */
-function printUser (User, targTable) {
-    let oldTable = document.getElementById('tableRemovableUsers')
-    if (oldTable) {
-        targTable.removeChild(oldTable);
-    }
-    let tableRes = document.createElement('table');
-    let rawIndex = document.createElement('tr');
-    let rawValue = document.createElement ('tr');
-    let index = document.createElement('th');
-    index.innerText = 'Index';
-    let valueTd = document.createElement('td');
-    valueTd.innerText = 'Value';
-    rawIndex.appendChild(index);
-    rawIndex.appendChild(valueTd);
+// function printUser (User, targTable) {
+//     let oldTable = document.getElementById('tableRemovableUsers')
+//     if (oldTable) {
+//         targTable.removeChild(oldTable);
+//     }
+//     let tableRes = document.createElement('table');
+//     let rawIndex = document.createElement('tr');
+//     let rawValue = document.createElement ('tr');
+//     let index = document.createElement('th');
+//     index.innerText = 'Index';
+//     let valueTd = document.createElement('td');
+//     valueTd.innerText = 'Value';
+//     rawIndex.appendChild(index);
+//     rawIndex.appendChild(valueTd);
 
-    for (let i=0; i<usersMass.length;i++){
-        let index = document.createElement('th');
-        index.innetText = key_elem;
-        let valueTd = document.createElement('td');
-        valueTd.innerText = Users[i].login;
-        rawIndex.appendChild(index);
-        rawValue.appendChild(valueTd);
+//     for (let i=0; i<usersMass.length;i++){
+//         let index = document.createElement('th');
+//         index.innetText = key_elem;
+//         let valueTd = document.createElement('td');
+//         valueTd.innerText = Users[i].login;
+//         rawIndex.appendChild(index);
+//         rawValue.appendChild(valueTd);
 
-    }
-    tableRes.appenChild(rawIndex);
-    tableRes.appenChild(rawValue);
-    tableRes.id = 'tableRemovableUsers';
-    tarTable.appendChild(tableRes);
-}
+//     }
+//     tableRes.appenChild(rawIndex);
+//     tableRes.appenChild(rawValue);
+//     tableRes.id = 'tableRemovableUsers';
+//     tarTable.appendChild(tableRes);
+// }
 
 function addUser () {
 
     let addUser = new User(
         /**
          * ------------------------------------------------------
-         * 12. Откуда берется index ?
+         * 12. Откуда берется index ? +
          * ------------------------------------------------------
          */
 
-        index.value,
-        login.value,
-        age.value,
+         name.value,
+         secName.value,
+         lastName.value,
+         login.value,
+         age.value,
+         growth.value
     );
     let id = usersMass.length;
     userMass.push(addUser);
@@ -434,14 +462,9 @@ function addUser () {
     }
 /**
  * ------------------------------------------------------
- * 13. Если есть else то где if ?
+ * 13. Если есть else то где if ? удалил
  * ------------------------------------------------------
  */
-    else
-    {
-        alert("Введите значения!")
-    }
-}
 /**
  * ------------------------------------------------------
  * 14. Такой функции в index.html не используется
@@ -449,14 +472,15 @@ function addUser () {
  * ------------------------------------------------------
  */
 
-function middleheight() {
+function midleheight() {
     let isNotNull = Number(index.value) && Number(login.value);
     if (isNotNull) {
         for (let index in usersMass)
             let summAges += age.value;
-            let middleheight = summAges / usersMass.length;
+            // почему то просит в сложение +, и тд
+            let midleheight = summAges / usersMass.length;
             let Countusers = usersMass.length;
-            Middleheight.innerhtml = middleheight;
+            midleheight.innerhtml = midleheight;
             Countusers.innerhtml = usersMass.length;
     }
     else {
