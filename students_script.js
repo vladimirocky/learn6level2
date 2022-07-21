@@ -1,12 +1,4 @@
-/**
- * -------------------------------------------------------
- * 1. Беда с фигурными скобками!
- * 2. Какую из двух printUser планировалось использовать?
- * -------------------------------------------------------
- */
-
-
-// init
+/// init
 /* Читайте комментарии и допишите код где необходимо */
 
 // Тут объяелен массив и его можно и нужно будет менять
@@ -17,23 +9,8 @@ let usersMass = [];
 
 // Напишите функцию-конструктор
 // которая позволит создавать объекты User
-function User (login, name) {
-    this.name = name;
-    this.login = login;
-
+function User(name, surname,lastname,login,age,height) {
     /**
-     * -------------------------------------------------------
-     * 3. А как же поля для:
-     *  - отчество
-     *  - фамилия
-     *  - возраст
-     *  - рост
-     *  ???
-     *  4. Как минимум возраст и рост нужны чтобы считать:
-     *   - средний рост
-     *   - средний возраст
-     *
-     *   -------------------------------------------------------
      * Ваш код тут
      *
     this.name = name;
@@ -43,38 +20,16 @@ function User (login, name) {
      ...
     *
      */
+    this.name = name;
+    this.surname = surname;
+    this.lastname = lastname;
+    this.login = login;
+    this.age = age;
+    this.height = height;
 }
-function addUser(){
-    let isNotNull = userName.value && userLogin.value;
-    if (isNotNull) {
-    let trueMass = new User (
-        name.value,
-        login.value,
-        )
-    }
-}
+
 // Функция реализует вывод массива на экран
 // Если вы изменили массив - вызовите эту функцию чтобы отобразить актальные значения
-
-
-/**
- * -------------------------------------------------------
- * 5. Какая-то недоделанная функция:
- *  - нигде не используется
- *  - "targtable.innerHTML = nameUser" заменит весь html на одно значение nameUser
- * -------------------------------------------------------
- */
-function UserName () {
-    let id = selectUser.value;
-    if (id) {
-        let nameUser = baseMass[id];
-        targtable.innerHTML = nameUser;
-    }
-    else {
-        alert("Не выбран пользователь!");
-    }
-}
-
 /**
  *
  * @param anyArray - массив с данными которые будем отображать
@@ -89,9 +44,9 @@ function printMass (anyArray, targTable) {
     }
 
     // Создать элемент таблица
-    let tableRes = document.createElement('table');
+    let tableRes = document.createElement('table')
     // Строка индекса
-    let rawIndex = document.createElement('tr');
+    let rawIndex = document.createElement('tr')
     // Строка значений
     let rawValue = document.createElement('tr');
     // Ячейка заголовок
@@ -119,7 +74,6 @@ function printMass (anyArray, targTable) {
         // Добавить к строкам новые ячейки
         rawIndex.appendChild(index);
         rawValue.appendChild(valueTd);
-
     }
 
     // Записываем в теблицу строки со значениями
@@ -129,8 +83,6 @@ function printMass (anyArray, targTable) {
     tableRes.id = 'tableRemovable';
     // Запишем таблицу на свое место
     targTable.appendChild(tableRes);
-
-
 }
 
 /**
@@ -167,50 +119,52 @@ function printMass (anyArray, targTable) {
  * ...
  *
 */
-    /**
-     * @param User
-     * @param targTable
-     */
 
-    function printUser (User, targTable) {
 
-        let oldTable = document.getElementById('tableRemovableUsers')
-        if (oldTable) {
-            targTable.removeChild(oldTable);
-        }
-        let tableRes = document.createElement('table');
-        let rawIndex = document.createElement('tr');
-        let rawValue = document.createElement ('tr');
-        let index = document.createElement('th');
-        index.innerText = 'Index';
-        let valueTd = document.createElement('td');
-        valueTd.innerText = 'Value';
-        rawIndex.appendChild(index);
-        rawIndex.appendChild(valueTd);
-
-        for (let i=0; i<usersMass.length;i++){
-            let index = document.createElement('th');
-            /**
-             * -------------------------------------------------------
-             * 6. Верояно индексом будет i а не key_elem
-             *
-             * что таке key_elem,Users, tarTable непонятно...
-             * функция ничего о них не знает
-             * -------------------------------------------------------
-             */
-            index.innetText = key_elem;
-            let valueTd = document.createElement('td');
-            valueTd.innerText = Users[i].login;
-            rawIndex.appendChild(index);
-            rawValue.appendChild(valueTd);
-
-        }
-        tableRes.appenChild(rawIndex);
-        tableRes.appenChild(rawValue);
-        tableRes.id = 'tableRemovableUsers';
-        tarTable.appendChild(tableRes);
-
+function printUserMass(anyArray,targTable){
+    let oldTable = document.getElementById('tableRemovableUsers');
+    if (oldTable) {
+        targTable.removeChild(oldTable);
     }
+// Создать элемент таблица
+let tableRes = document.createElement('table')
+// Строка индекса
+let rawIndex = document.createElement('tr')
+// Строка значений
+let rawValue = document.createElement('tr');
+// Ячейка заголовок
+let index = document.createElement('th');
+// Присвоим значение ячейки заголовка
+index.innerText = 'Index';
+// Ячейка значений
+let valueTd = document.createElement('td');
+// Присвоение значения ячейке значений
+valueTd.innerText = 'Value';
+// Добавить к строкам новые ячейки
+rawIndex.appendChild(index);
+rawValue.appendChild(valueTd);
+
+    for (let i = 0; i < usersMass.length; i++){
+        let index = document.createElement('th');
+        index.innerText = i;
+
+        let valueTd = document.createElement('td');
+        valueTd.innerText = anyArray[i].loginUser;
+
+        rawIndex.appendChild(index);
+        rawValue.appendChild(valueTd);
+    }
+
+    // Записываем в теблицу строки со значениями
+    tableRes.appendChild(rawIndex);
+    tableRes.appendChild(rawValue);
+    // Добавим id таблицы
+    tableRes.id = 'tableRemovableUsers';
+    // Запишем таблицу на свое место
+    targTable.appendChild(tableRes);
+}
+
+
 
 // эта функция реализована для примера и уже работает
 function popMass () {
@@ -239,6 +193,7 @@ function shiftMass(){
          * let result =
          */
         let result = baseMass.shift();
+
         pop_shift_Value.innerHTML = '- ' + result;
         printMass(baseMass, massOnBoard);
     } else {
@@ -253,8 +208,9 @@ function pushMass () {
         /**
          * Ваш код тут
          * примените push к baseMass
+         * 
          */
-        let result = baseMass.push();
+        let result = baseMass.push(pushVal);
         printMass(baseMass, massOnBoard); // это выведет обновленный массив
     } else {
         alert("Введите значение!");
@@ -273,8 +229,7 @@ function unshiftMass () {
          * новый массив
          */
 
-        let result = baseMass.unshift();
-        printMass(baseMass, massOnBoard);
+        let result = baseMass.unshift(shiftVal)
     } else {
         alert("Введите значение!");
     }
@@ -286,7 +241,8 @@ function lengthMass(){
      * let result =
      * запишите в result длину массива
      */
-    let result = baseMass.length;
+
+    const result = baseMass.length
     lengthValue.innerHTML = " - " + result;
 }
 
@@ -294,20 +250,7 @@ function concatMass (){
     // В new_mass будет записан массив,
     // сформированный из значений поля ввода, записанных через запятую
     let new_mass = concatValue.value.split(',');
-    let isNoTNull = (new_mass.value);
     /**
-     * -------------------------------------------------------
-     * 7. isNoTNull и isNotNull это разные имена переменных
-     * -------------------------------------------------------
-     */
-    if (isNotNull) {
-        old_mass = old_mass.concat(new_mass);
-    }
-    else{
-        alert('Пустое поле, введите значения!')
-    }
-}
-     /**
      * Ваш код тут
      * Напишите условие, чтобы проверить
      * что поле ввода не пустое
@@ -319,25 +262,15 @@ function concatMass (){
      * Если поле ввода пустое используйте окно alert
      */
 
-} // 8. Что закрывает эта кавычка?
+    if (concatValue.value){
+        baseMass = baseMass.concat(new_mass);
+        printMass(baseMass,massOnBoard);
+    } else {
+        alert('Пусто')
+    }
+}
 
 function searchMass (){
-    let newMass = document.getElementById('searchValue');
-    let isNotNull = (newMass.value);
-    if (isNotNull) {
-        /**
-         * -------------------------------------------------------
-         * 9. indexOf() это метод, а не коллекция, поэтому квадратные скобки тут указаны ошибочно
-         * 10. Откуда взять i ?
-         */
-        let result = newMass.indexOf[i];
-        resIndex.innerHeight = result;
-    }
-        else {
-            newMass[i] = -1;
-            alert('Значение не найдено или поле пустое!');
-        }
-
     /**
      * Ваш код тут
      * Получите значение из элемента html с id -- searchValue
@@ -349,11 +282,101 @@ function searchMass (){
      * Результат успешного поиска запишите в элементе html с id -- resIndex
      * Если значение не найдено или поле пустое используйте окно alert
      */
+
+
+     let valueToSearch = searchValue.value;
+    if (valueToSearch) {
+        let result = baseMass.indexOf(valueToSearch);
+        resIndex.innerHTML = " - " + result;
+    }
+    else {   alert('Введите значние для поиска')
+}
 }
 
 
-
-
+function setOptions() {
+    let id = usersMass.length;
+  
+    let opt = document.createElement("option");
+  
+    opt.value = String(id);
+  
+    opt.text = newUser.login;
+  
+    selectUser.appendChild(opt);
+  }
+  
+  function addUser() {
+    const requiredNotEmpty = login.value && age.value && userHeight.value;
+  
+    if (requiredNotEmpty) {
+      let newUser = new User(
+        firstName.value,
+        secName.value,
+        lastName.value,
+        login.value,
+        age.value,
+        userHeight.value
+      );
+      usersMass.push(newUser);
+  
+      let id = usersMass.length;
+  
+      let opt = document.createElement("option");
+  
+      opt.value = String(id);
+  
+      opt.text = newUser.login;
+  
+      selectUser.appendChild(opt);
+    }
+    firstName.value = "";
+    secName.value = "";
+    lastName.value = "";
+    login.value = "";
+    age.value = "";
+    userHeight.value = "";
+  }
+  
+  function midleHeight() {
+    let sum = 0;
+    for (let user of usersMass) {
+      sum += +user.height;
+    }
+    let result = sum / usersMass.length;
+  
+    userResult.innerHTML = `средний рост ${result}`;
+  }
+  
+  function midleAge() {
+    let sum = 0;
+    for (let user of usersMass) {
+      sum += +user.age;
+    }
+    let result = sum / usersMass.length;
+  
+    userResult.innerHTML = `средний возраст ${result}`;
+  }
+  
+  function countUsers() {
+    userResult.innerHTML = `${usersMass.length} пользователей`;
+  }
+  
+  //Удаляет выбранного пользователя
+  function myFunc() {
+    const selectedUser = selectUser.value;
+  
+    if (selectedUser) {
+      const index = usersMass.map((e) => e.login).indexOf(selectedUser);
+      selectUser.options.remove(selectUser.selectedIndex);
+      usersMass.splice(index, 1);
+  
+      userResult.innerHTML = `Пользователь ${selectedUser} больше не с нами`;
+    } else {
+      userResult.innerHTML = `Базу пользователей опустошили до нас`;
+    }
+  }
+  
 
 /**
  * Ваш код тут
@@ -373,114 +396,12 @@ function searchMass (){
  * countUsers() -- выведет длину массива пользователей
  * myFunc() - функция которая работает с селектором, придумайте что сделать самостоятельно
  */
-/**
- * ------------------------------------------------------
- * 11. Такая функция уже есть, с тем же именем и ошибками
- * ------------------------------------------------------
- */
-function printUser (User, targTable) {
-    let oldTable = document.getElementById('tableRemovableUsers')
-    if (oldTable) {
-        targTable.removeChild(oldTable);
-    }
-    let tableRes = document.createElement('table');
-    let rawIndex = document.createElement('tr');
-    let rawValue = document.createElement ('tr');
-    let index = document.createElement('th');
-    index.innerText = 'Index';
-    let valueTd = document.createElement('td');
-    valueTd.innerText = 'Value';
-    rawIndex.appendChild(index);
-    rawIndex.appendChild(valueTd);
 
-    for (let i=0; i<usersMass.length;i++){
-        let index = document.createElement('th');
-        index.innetText = key_elem;
-        let valueTd = document.createElement('td');
-        valueTd.innerText = Users[i].login;
-        rawIndex.appendChild(index);
-        rawValue.appendChild(valueTd);
-
-    }
-    tableRes.appenChild(rawIndex);
-    tableRes.appenChild(rawValue);
-    tableRes.id = 'tableRemovableUsers';
-    tarTable.appendChild(tableRes);
-}
-
-function addUser () {
-
-    let addUser = new User(
-        /**
-         * ------------------------------------------------------
-         * 12. Откуда берется index ?
-         * ------------------------------------------------------
-         */
-
-        index.value,
-        login.value,
-        age.value,
-    );
-    let id = usersMass.length;
-    userMass.push(addUser);
-
-    let opt = document.createElement("option");
-    opt.value = String(id);
-    opt.text = newMass.name;
-    selectMass.appendChild(opt);
-    index.value = '';
-    login.value = '';
-    age.value = '';
-    }
-/**
- * ------------------------------------------------------
- * 13. Если есть else то где if ?
- * ------------------------------------------------------
- */
-    else
-    {
-        alert("Введите значения!")
-    }
-}
-/**
- * ------------------------------------------------------
- * 14. Такой функции в index.html не используется
- * там есть - midleHeight()
- * ------------------------------------------------------
- */
-
-function middleheight() {
-    let isNotNull = Number(index.value) && Number(login.value);
-    if (isNotNull) {
-        for (let index in usersMass)
-            let summAges += age.value;
-            let middleheight = summAges / usersMass.length;
-            let Countusers = usersMass.length;
-            Middleheight.innerhtml = middleheight;
-            Countusers.innerhtml = usersMass.length;
-    }
-    else {
-        ("Введите значения!")
-    }
-    }
-
-function findperson() {
-    let person = document.getElementById('person');
-       if (person) {
-           usersMass.values();
-           alert("Такой человек есть в списке!")
-       }
-       else {
-        alert("Такой человек в списке отсутствует!")
-    }
-
-}
 document.addEventListener("DOMContentLoaded", function () { printMass(baseMass, massOnBoard);});
-/**
- * Внимание!
- * ------------------------------------------------
- *  :(
- * ------------------------------------------------
- * Раскомментировать, когда реализуете printUserMass()
-document.addEventListener("DOMContentLoaded", function () { printUserMass(usersMass, massOfUser);});
-*/
+
+  //В//нимание!
+ // Раскомментировать, когда реализуете printUserMass()
+// document.addEventListener("DOMContentLoaded", function () { printUserMass(usersMass, massOfUser);});
+document.addEventListener("DOMContentLoaded", function () {
+    printUserMass(usersMass, massOfUser);
+  });
